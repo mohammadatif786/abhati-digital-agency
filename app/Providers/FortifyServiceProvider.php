@@ -6,8 +6,11 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\User;
+use App\Notifications\LoginNotification;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -36,6 +39,20 @@ class FortifyServiceProvider extends ServiceProvider
         //Login view
         Fortify::loginView(function () {
             return view('auth.login');
+        });
+
+        //Send Notification to login user
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
+                $user->notify((new LoginNotification($request->ip(), $request->userAgent()))->onQueue('emails'));
+                session(['login_notification_sent' => true]);
+
+                return $user;
+            }
+
+            return null;
         });
 
         RateLimiter::for('login', function (Request $request) {
