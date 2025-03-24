@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServicePointsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,4 +11,32 @@ Route::get('/', function () {
 
 Route::get('dashboard', function () {
     return view('dashboard');
-})->middleware(['auth']);
+})->middleware(['auth'])->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    //Service Routes
+    Route::controller(ServiceController::class)->group(function () {
+        Route::get('/services/index', 'index')->name('services.index');
+        Route::post('/serverice/store', 'store')->name('store.service');
+        Route::get('/serverice/show/{id}', 'show')->name('show.service');
+        Route::put('/serverice/update/{service_id}/{oldImage}', 'update')->name('update.service');
+        Route::delete('/serverice/delete/{id}/image/{image}', 'destory')->name('delete.service');
+
+        //Images
+        Route::post('/image/store/{service_id}', 'storeServiceImage')->name('store.service.image');
+        Route::get("/image/edit/{id}", 'editImage')->name('edit.service.image');
+        Route::put("/image/update/{imageID}/{oldServiceImage}", 'updateServiceImage')->name('update.service.image');
+        Route::delete('/image/delete/{id}/{image}', 'deleteServiceImage')->name('delete.service.image');
+    });
+
+    //Service Points Routes
+    Route::controller(ServicePointsController::class)->group(function () {
+
+        Route::post('/points/{service_id}', 'create')->name('store.point');
+        Route::get('/point/edit/{id}', 'edit')->name('edit.point');
+        Route::put('/point/update/{id}', 'update')->name('update.point');
+        Route::delete('/point/delete/{id}', 'delete')->name('delete.point');
+    });
+});
