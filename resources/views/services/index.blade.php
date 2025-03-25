@@ -21,7 +21,7 @@
                     </span>
                     <!--end::Svg Icon-->
                     <input type="text" data-kt-customer-table-filter="search"
-                        class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers">
+                        class="form-control form-control-solid w-250px ps-15" placeholder="Search Services">
                 </div>
                 <!--end::Search-->
             </div>

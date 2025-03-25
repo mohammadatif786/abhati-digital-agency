@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePointsController;
 use App\Http\Controllers\WebController;
@@ -41,5 +42,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/point/edit/{id}', 'edit')->name('edit.point');
         Route::put('/point/update/{id}', 'update')->name('update.point');
         Route::delete('/point/delete/{id}', 'delete')->name('delete.point');
+    });
+
+    //Project Routes
+    Route::controller(ProjectController::class)->group(function () {
+
+        Route::get('/projects/index', 'index')->name('project.index');
+        Route::post('/project/store', 'store')->name('store.project');
+        Route::get('/project/show/{id}', 'show')->name('show.project');
+        Route::delete('project/delete/{id}/{oldImage}', 'deleteProject')->name('delete.project');
     });
 });
