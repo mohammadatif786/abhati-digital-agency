@@ -2,19 +2,22 @@
 
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePointsController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(WebController::class)->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::get('/service/detail/{service_id}', 'serviceDetail')->name('service.details');
 });
 
-
-Route::get('dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-
 Route::middleware(['auth'])->group(function () {
+
+
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
 
     //Service Routes
     Route::controller(ServiceController::class)->group(function () {
