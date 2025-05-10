@@ -8,6 +8,7 @@
     <title> @yield('title') | <?php echo htmlentities($_SERVER['HTTP_HOST'], ENT_QUOTES, 'UTF-8'); ?></title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <meta property="og:locale" content="en_US" />
@@ -122,6 +123,20 @@
     <!--end::Global Javascript Bundle-->
     <script src="/back_assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <!--end::Javascript-->
+    <script src="/back_assets/js/jquery.js"></script>
+
+    @include('partials.jsRoutes');
+    <script src="{{ asset('back_assets/js/category.js') }}"></script>
+
+
+    <script>
+        @if ($errors->any())
+
+            $(document).ready(function() {
+                $('.modal').modal('show')
+            })
+        @endif
+    </script>
 </body>
 <!--end::Body-->
 
