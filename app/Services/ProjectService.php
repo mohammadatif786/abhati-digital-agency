@@ -42,6 +42,18 @@ class ProjectService
     }
 
     /**
+     * Update project method
+     */
+    public function updateProject(array $data, $id, $oldImage)
+    {
+        $data['id'] = $id;
+        if (isset($data['image'])) {
+            $data['image'] = $this->storeUpdateImage($data['image'], $oldImage);
+        }
+        return $this->projectRepository->update($data);
+    }
+
+    /**
      * Delete project data
      */
     public function deleteProject($id, $oldImage)

@@ -23,6 +23,13 @@ class ProjectRepository
     {
         return Project::findOrfail($id);
     }
+    //update
+    public function update(array $data)
+    {
+        $project = Project::findOrfail($data['id']);
+        $project->update($data);
+        return $project;
+    }
 
     //destroy
     public function destroy($id)

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->dateTime('complete_year')->nullable();
-            $table->string('category')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('client_name')->nullable();
             $table->string('website_url')->nullable();
             $table->text('research_and_strategy')->nullable();
