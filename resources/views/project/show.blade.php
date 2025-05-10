@@ -32,7 +32,7 @@
                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title=""
                             data-bs-original-title="Edit Service details">
                             <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_service_edit">Edit</a>
+                                data-bs-target="#kt_modal_edit_project">Edit</a>
                         </span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             <!--begin:::Tab content-->
             <div class="tab-content" id="myTabContent">
 
-                <!--begin::: Points Tab-->
+                <!--begin::: images Tab-->
                 <div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
                     <!--begin::Card-->
                     <div class="card pt-4 mb-6 mb-xl-9">
@@ -201,11 +201,212 @@
                     </div>
                     <!--end::Card-->
                 </div>
-                <!--end:::Points Tab-->
+                <!--end:::images Tab-->
             </div>
             <!--end:::Tab content-->
         </div>
         <!--end::Content-->
     </div>
 
+
+    <div class="modal" id="kt_modal_edit_project" tabindex="-1" role="dialog">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Form-->
+                <form action="{{ route('update.project', ['project_id' => $project->id, 'oldImage' => $project->image]) }}"
+                    method="POST" enctype="multipart/form-data" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+                    @csrf
+                    @method('PUT')
+                    <!--begin::Modal header-->
+                    <div class="modal-header" id="kt_modal_edit_project_header">
+                        <!--begin::Modal title-->
+                        <h2 class="fw-bolder">Update - {{ $project->name }}</h2>
+                        <!--end::Modal title-->
+                        <!--begin::Close-->
+                        <div id="kt_modal_edit_project_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                        transform="rotate(45 7.41422 6)" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Modal header-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body py-10 px-lg-17">
+
+                        <!--begin::Title-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Name</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                    name="name" value="{{ $project->name }}" required>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Title-->
+
+                        <!--begin::Description-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Description</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <textarea cols="5" rows="5" class="form-control form-control-solid" name="description" required>{{ $project->description }}</textarea>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Description-->
+
+                        <!--begin::customer_name-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Customer Name</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                    name="client_name" value="{{ $project->client_name }}" required>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::customer_name-->
+
+                        <!--begin::category-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Category</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                    name="category" value="{{ $project->category }}" required>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::category-->
+
+
+                        <!--begin::complete year-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Complete Year</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="datetime-local" class="form-control form-control-solid" placeholder=""
+                                    name="complete_year" value="{{ $project->complete_year }}" required>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::complete year-->
+
+                        <!--begin::website_url-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Website Url</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="url" class="form-control form-control-solid" placeholder=""
+                                    name="website_url" value="{{ $project->website_url }}" required>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::website_url-->
+
+                        <!--begin::research_and_strategy-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Research And Strategy</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <textarea rows="6" cols="6" class="form-control form-control-solid" placeholder=""
+                                    name="research_and_strategy" required>{{ $project->research_and_strategy }}</textarea>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::research_and_strategy-->
+
+                        <!--begin::challenging-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Challenging</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <textarea rows="6" cols="6" class="form-control form-control-solid" placeholder="" name="challenging"
+                                    required>{{ $project->challenging }}</textarea>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::challenging-->
+
+                        <!--begin::Image-->
+                        <div class="scroll-y me-n7 pe-7" style="max-height: 323px;">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">Upload Image</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="file" name="image" class="form-control form-control-solid"
+                                    accept="image/*" required />
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Image-->
+
+                    </div>
+                    <!--end::Modal body-->
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                        <!--begin::Button-->
+                        <button type="reset" id="kt_modal_edit_project_cancel"
+                            class="btn btn-light me-3">Discard</button>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_modal_edit_project_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                        </button>
+                        <!--end::Button-->
+                    </div>
+                    <!--end::Modal footer-->
+                    <div></div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
 @endsection
