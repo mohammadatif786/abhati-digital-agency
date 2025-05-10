@@ -249,7 +249,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="customer_name" required>
+                                    name="client_name" required>
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
