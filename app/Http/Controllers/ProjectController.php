@@ -49,6 +49,20 @@ class ProjectController extends Controller
     }
 
     /**
+     * Update project data in ProjectService
+     */
+    public function update(Request $request, $id, $oldImage)
+    {
+        $updateProject = $this->projectService->updateProject($request->all(), $id, $oldImage);
+
+        if (request()->expectsJson()) {
+            return response()->json($updateProject);
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Delete project data
      */
     public function deleteProject($id, $oldImage)

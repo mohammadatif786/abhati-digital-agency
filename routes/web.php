@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePointsController;
@@ -44,12 +45,22 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/point/delete/{id}', 'delete')->name('delete.point');
     });
 
+    Route::controller(CategoryController::class)->group(function () {
+
+        Route::get('/category/index', 'index')->name('category.index');
+        Route::get('/show/category/modal', 'showModal')->name('category.show.modal');
+        Route::post('/store/category', 'store')->name('store.category');
+
+        Route::delete('/delete/category/{id}', 'delete')->name('delete.category');
+    });
+
     //Project Routes
     Route::controller(ProjectController::class)->group(function () {
 
         Route::get('/projects/index', 'index')->name('project.index');
         Route::post('/project/store', 'store')->name('store.project');
         Route::get('/project/show/{id}', 'show')->name('show.project');
+        Route::put('/project/update/{project_id}/{oldImage}', 'update')->name('update.project');
         Route::delete('project/delete/{id}/{oldImage}', 'deleteProject')->name('delete.project');
     });
 });
